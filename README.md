@@ -5,3 +5,16 @@
 3. Смена размеров сетки сервисов
 4. Добавление категорий
 5. NeonMode фича
+
+
+## Как запустить?
+
+```
+docker build . -t homelab-dashboard:latest --no-cache
+```
+
+Старт контейнера
+
+```
+docker run -d -p 8888:80 --name homelab-dashboard homelab-dashboard:latest
+```
