@@ -1,0 +1,2194 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homelab Dashboard</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <style>
+        :root {
+            /* Текущая схема */
+            --primary-color: #5e35b1;
+            --secondary-color: #2196f3;
+            --background-color: #111936;
+            --card-background: #1a223f;
+            --text-color: #fff;
+            --text-secondary: #8492c4;
+            --success-color: #00e396;
+            --danger-color: #ff4560;
+            --online-color: #00C49A;
+            
+            /* Неоновые цвета */
+            --neon-purple: #b537f2;
+            --neon-blue: #3b82f6;
+            --neon-pink: #f63b8e;
+            --neon-green: #3bf63b;
+            --neon-red: #ff4560;
+            --neon-cyan: #00e5ff;
+            --neon-yellow: #ffeb3b;
+            --neon-orange: #ff9800;
+            
+            /* Цветовые схемы */
+            /* 1. Синяя (текущая) */
+            --theme-1-primary: #5e35b1;
+            --theme-1-secondary: #2196f3;
+            --theme-1-background: #111936;
+            --theme-1-card: #1a223f;
+            
+            /* 2. Тропический рассвет */
+            --theme-2-primary: #FF6B6B;
+            --theme-2-secondary: #FFD93D;
+            --theme-2-background: #1F1D36;
+            --theme-2-card: #2D2B4A;
+            
+            /* 3. Весенний сад */
+            --theme-3-primary: #4CAF50;
+            --theme-3-secondary: #8BC34A;
+            --theme-3-background: #1A2F1C;
+            --theme-3-card: #2A452C;
+            
+            /* 4. Закатный бриз */
+            --theme-4-primary: #FF7E67;
+            --theme-4-secondary: #FFA07A;
+            --theme-4-background: #1D1B24;
+            --theme-4-card: #2D2B34;
+            
+            /* 5. Морская волна */
+            --theme-5-primary: #00B4DB;
+            --theme-5-secondary: #48CAE4;
+            --theme-5-background: #0A1B2A;
+            --theme-5-card: #1A2B3A;
+            
+            /* 6. Летний коктейль */
+            --theme-6-primary: #FF4081;
+            --theme-6-secondary: #FF80AB;
+            --theme-6-background: #1A0F1F;
+            --theme-6-card: #2A1F2F;
+            
+            /* 7. Тропический лес */
+            --theme-7-primary: #76FF03;
+            --theme-7-secondary: #B2FF59;
+            --theme-7-background: #0F1F0F;
+            --theme-7-card: #1F2F1F;
+            
+            /* 8. Космическая пыль */
+            --theme-8-primary: #7C4DFF;
+            --theme-8-secondary: #B388FF;
+            --theme-8-background: #0F0A1F;
+            --theme-8-card: #1F1A2F;
+            
+            /* 9. Огненный закат */
+            --theme-9-primary: #FF3D00;
+            --theme-9-secondary: #FF6E40;
+            --theme-9-background: #1F0F0A;
+            --theme-9-card: #2F1F1A;
+            
+            /* 10. Ледяная мята */
+            --theme-10-primary: #1DE9B6;
+            --theme-10-secondary: #64FFDA;
+            --theme-10-background: #0A1F1F;
+            --theme-10-card: #1A2F2F;
+            
+            /* 11. Сахарная вата */
+            --theme-11-primary: #EC407A;
+            --theme-11-secondary: #F48FB1;
+            --theme-11-background: #1F1A24;
+            --theme-11-card: #2F2A34;
+            
+            /* 12. Электрический синий */
+            --theme-12-primary: #00E5FF;
+            --theme-12-secondary: #18FFFF;
+            --theme-12-background: #0A1F2F;
+            --theme-12-card: #1A2F3F;
+            
+            /* 13. Малиновый джем */
+            --theme-13-primary: #D500F9;
+            --theme-13-secondary: #E040FB;
+            --theme-13-background: #1A0F1F;
+            --theme-13-card: #2A1F2F;
+            
+            /* 14. Лаймовый фреш */
+            --theme-14-primary: #CDDC39;
+            --theme-14-secondary: #DCE775;
+            --theme-14-background: #1F2A0F;
+            --theme-14-card: #2F3A1F;
+            
+            /* 15. Коралловый риф */
+            --theme-15-primary: #FF6E40;
+            --theme-15-secondary: #FFAB91;
+            --theme-15-background: #1F1A1F;
+            --theme-15-card: #2F2A2F;
+            
+            /* 16. Северное сияние */
+            --theme-16-primary: #64FFDA;
+            --theme-16-secondary: #A7FFEB;
+            --theme-16-background: #0F1F1A;
+            --theme-16-card: #1F2F2A;
+            
+            /* 17. Фруктовый пунш */
+            --theme-17-primary: #FF80AB;
+            --theme-17-secondary: #FF4081;
+            --theme-17-background: #1F0F1A;
+            --theme-17-card: #2F1F2A;
+            
+            /* 18. Цитрусовый взрыв */
+            --theme-18-primary: #FFC107;
+            --theme-18-secondary: #FFD740;
+            --theme-18-background: #1F1A0F;
+            --theme-18-card: #2F2A1F;
+            
+            /* 19. Глубокий океан */
+            --theme-19-primary: #00B8D4;
+            --theme-19-secondary: #00E5FF;
+            --theme-19-background: #0A1F2F;
+            --theme-19-card: #1A2F3F;
+            
+            /* 20. Радужный единорог */
+            --theme-20-primary: #E040FB;
+            --theme-20-secondary: #EA80FC;
+            --theme-20-background: #1A0F1F;
+            --theme-20-card: #2A1F2F;
+            
+            --neon-shadow: 0 0 10px rgba(181, 55, 242, 0.5), 
+                           0 0 20px rgba(181, 55, 242, 0.3), 
+                           0 0 30px rgba(181, 55, 242, 0.1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            min-height: 100vh;
+        }
+
+        .container {
+            display: grid;
+            grid-template-columns: 260px 1fr;
+            min-height: 100vh;
+        }
+
+        .sidebar {
+            background-color: var(--card-background);
+            padding: 1rem;
+        }
+
+        .main-content {
+            padding: 1.5rem;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .services-grid {
+            display: none;
+        }
+
+        .service-card {
+            background-color: var(--card-background);
+            border-radius: 12px;
+            padding: 1rem;
+            display: flex;
+            align-items: flex-start;
+            position: relative;
+            height: 84px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .service-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card .icon-container {
+            width: 40px;
+            height: 40px;
+            min-width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 1rem;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+        }
+
+        .service-card i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card .content {
+            flex: 1;
+            min-width: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+            height: 100%;
+        }
+
+        .service-card h3 {
+            margin: 0;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--text-color);
+            letter-spacing: 0.02em;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .service-card p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            margin: 0.25rem 0 0.75rem 0;
+            line-height: 1.4;
+            opacity: 0.9;
+        }
+
+        .service-card .status {
+            font-size: 0.75rem;
+            font-weight: 500;
+            text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+            background-color: rgba(0, 196, 154, 0.1);
+            color: var(--online-color);
+            padding: 0.15rem 0.5rem;
+            border-radius: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(0, 196, 154, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .service-card .status.offline {
+            background-color: rgba(255, 69, 96, 0.1);
+            color: var(--danger-color);
+            border-color: rgba(255, 69, 96, 0.2);
+        }
+
+        .service-card .status.checking {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: #ffc107;
+            border-color: rgba(255, 193, 7, 0.2);
+        }
+
+        .service-card .status::before {
+            content: '';
+            display: inline-block;
+            width: 6px;
+            height: 6px;
+            background-color: currentColor;
+            border-radius: 50%;
+            box-shadow: 0 0 8px currentColor;
+        }
+
+        .service-card .status.online {
+            background-color: rgba(0, 196, 154, 0.1);
+            color: var(--online-color);
+        }
+
+        .top-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 1rem;
+            height: 50px;
+            background: var(--card-background);
+            gap: 1rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(8px);
+        }
+
+        .search-bar {
+            display: flex;
+            align-items: center;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            width: 300px;
+        }
+
+        .search-bar input {
+            background: none;
+            border: none;
+            color: var(--text-color);
+            margin-left: 0.5rem;
+            width: 100%;
+            font-size: 0.9rem;
+        }
+
+        .search-bar input::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .search-bar i {
+            color: var(--text-secondary);
+            font-size: 1.2rem;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            min-width: 200px;
+        }
+
+        .top-bar-actions {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .top-bar-actions i {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            cursor: pointer;
+        }
+
+        .profile-pic {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            cursor: pointer;
+        }
+
+        .edit-button {
+            position: absolute;
+            right: 1rem;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0;
+            transition: opacity 0.2s;
+            background: var(--primary-color);
+            border: none;
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            z-index: 2;
+        }
+
+        .service-card:hover .edit-button {
+            opacity: 1;
+        }
+
+        /* Модальное окно */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: var(--card-background);
+            padding: 2rem;
+            border-radius: 8px;
+            width: 400px;
+            position: relative;
+        }
+
+        .modal-content h2 {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.25rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--text-secondary);
+            border-radius: 4px;
+            background: var(--background-color);
+            color: var(--text-color);
+            font-size: 0.9rem;
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        .form-group select option {
+            background: var(--card-background);
+            color: var(--text-color);
+        }
+
+        .modal-buttons {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .modal-buttons button {
+            padding: 0.5rem 1rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            min-width: 100px;
+        }
+
+        .modal-buttons .save-button {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            box-shadow: 0 2px 8px rgba(94, 53, 177, 0.2);
+        }
+
+        .modal-buttons .save-button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(94, 53, 177, 0.3);
+        }
+
+        .modal-buttons .cancel-button {
+            background: transparent;
+            color: var(--text-secondary);
+            border: 1px solid var(--text-secondary) !important;
+            margin-right: 1rem;
+        }
+
+        .modal-buttons .cancel-button:hover {
+            background: rgba(255, 255, 255, 0.05);
+            border-color: var(--text-color) !important;
+            color: var(--text-color);
+        }
+
+        /* Стили для кнопок в неоновом режиме */
+        .neon-mode .modal-buttons .save-button {
+            box-shadow: 0 0 10px var(--neon-purple),
+                       0 0 20px var(--neon-blue);
+        }
+
+        .neon-mode .modal-buttons .save-button:hover {
+            box-shadow: 0 0 15px var(--neon-purple),
+                       0 0 30px var(--neon-blue);
+        }
+
+        .neon-mode .modal-buttons .cancel-button {
+            border-color: var(--neon-purple) !important;
+            color: var(--neon-purple);
+        }
+
+        .neon-mode .modal-buttons .cancel-button:hover {
+            background: rgba(181, 55, 242, 0.1);
+            border-color: var(--neon-blue) !important;
+            color: var(--neon-blue);
+        }
+
+        .grid-controls {
+            display: none;
+        }
+
+        .category-section {
+            margin-bottom: 1rem;
+        }
+
+        .category-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+        }
+
+        .category-header h2 {
+            font-size: 1rem;
+            font-weight: 500;
+            color: var(--text-color);
+            margin: 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .category-header .actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .category-header .add-service-button {
+            background: none;
+            border: none;
+            color: var(--success-color);
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-header .add-service-button:hover {
+            background: rgba(0, 227, 150, 0.1);
+        }
+
+        .category-header button {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .category-header button:hover {
+            background: rgba(94, 53, 177, 0.1);
+            color: var(--primary-color);
+        }
+
+        .category-content {
+            display: grid;
+            grid-template-columns: repeat(var(--grid-columns, 4), 1fr);
+            gap: 1rem;
+            min-height: 84px;
+            transition: background-color 0.2s;
+            border-radius: 4px;
+        }
+
+        .category-content.drag-over {
+            background: rgba(94, 53, 177, 0.1);
+        }
+
+        .service-card.dragging {
+            opacity: 0.5;
+            cursor: move;
+        }
+
+        .add-category-button {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: var(--card-background);
+            border: none;
+            color: var(--text-secondary);
+            padding: 0.75rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
+        }
+
+        .add-category-button:hover {
+            background: rgba(94, 53, 177, 0.1);
+            color: var(--primary-color);
+        }
+
+        .add-category-button i {
+            font-size: 1.2rem;
+        }
+
+        /* Стили для модального окна категории */
+        .category-modal .form-group input {
+            margin-bottom: 0.5rem;
+        }
+
+        .category-modal .color-picker {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .category-modal .color-option {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            cursor: pointer;
+            border: 2px solid transparent;
+        }
+
+        .category-modal .color-option.selected {
+            border-color: var(--text-color);
+        }
+
+        /* Модальное окно для добавления сервиса */
+        .add-service-modal .icon-preview {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            background: rgba(94, 53, 177, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+        }
+
+        .add-service-modal .icon-preview i {
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .add-service-modal .icon-preview img {
+            width: 24px;
+            height: 24px;
+        }
+
+        .add-service-modal .icon-selector {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr);
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+            max-height: 200px;
+            overflow-y: auto;
+            padding: 0.5rem;
+            background: var(--background-color);
+            border-radius: 4px;
+        }
+
+        .add-service-modal .icon-option {
+            width: 32px;
+            height: 32px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            background: var(--card-background);
+            transition: all 0.2s;
+        }
+
+        .add-service-modal .icon-option:hover {
+            background: rgba(94, 53, 177, 0.1);
+        }
+
+        .add-service-modal .icon-option.selected {
+            background: var(--primary-color);
+            color: white;
+        }
+
+        .add-service-modal .icon-option i {
+            font-size: 1.2rem;
+        }
+
+        /* Стили для кнопки Neon Mode */
+        .neon-toggle {
+            background: linear-gradient(45deg, var(--neon-purple), var(--neon-blue));
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+
+        .neon-toggle::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, 
+                transparent, 
+                rgba(255, 255, 255, 0.1), 
+                transparent
+            );
+            transform: rotate(45deg);
+            animation: shine 3s infinite;
+        }
+
+        .neon-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 15px var(--neon-purple);
+        }
+
+        @keyframes shine {
+            0% {
+                left: -50%;
+            }
+            100% {
+                left: 100%;
+            }
+        }
+
+        /* Неоновые стили для карточек */
+        .neon-mode .service-card {
+            background: rgba(26, 34, 63, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 10px currentColor,
+                        0 0 20px currentColor,
+                        0 0 30px currentColor;
+            backdrop-filter: blur(8px);
+            position: relative;
+            color: var(--neon-purple);
+            transition: all 0.5s ease;
+        }
+
+        .neon-mode .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            border-radius: 12px;
+            background: linear-gradient(45deg, 
+                transparent 0%, 
+                rgba(255, 255, 255, 0.1) 45%, 
+                rgba(255, 255, 255, 0.1) 55%, 
+                transparent 100%
+            );
+            z-index: 0;
+        }
+
+        .neon-mode .service-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px currentColor,
+                        0 0 30px currentColor,
+                        0 0 40px currentColor;
+        }
+
+        .neon-mode .service-card .icon-container {
+            background: rgba(255, 255, 255, 0.1);
+            box-shadow: 0 0 10px currentColor;
+            z-index: 1;
+        }
+
+        .neon-mode .service-card i {
+            color: currentColor;
+            text-shadow: 0 0 5px currentColor;
+        }
+
+        .neon-mode .service-card h3 {
+            color: currentColor;
+            text-shadow: 0 0 5px currentColor;
+            z-index: 1;
+            position: relative;
+        }
+
+        .neon-mode .service-card .status {
+            background: rgba(59, 246, 59, 0.1);
+            border-color: rgba(59, 246, 59, 0.3);
+            box-shadow: 0 0 10px rgba(59, 246, 59, 0.2);
+        }
+
+        .neon-mode .service-card .status::before {
+            box-shadow: 0 0 8px var(--neon-green);
+        }
+
+        .neon-mode .category-header h2 i {
+            text-shadow: 0 0 5px currentColor;
+        }
+
+        /* Добавляем стили для кнопки переключения темы */
+        .theme-toggle {
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            box-shadow: 0 0 10px rgba(var(--primary-color), 0.3);
+        }
+
+        .theme-toggle:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 20px rgba(var(--primary-color), 0.5);
+        }
+
+        /* Улучшаем контрастность для текста в темных темах */
+        [style*="background: #0"] .service-card h3,
+        [style*="background: #1"] .service-card h3,
+        [style*="background: #2"] .service-card h3 {
+            text-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+        }
+
+        /* Улучшаем читаемость для светлых тем */
+        [style*="background: #f"] .service-card h3,
+        [style*="background: #e"] .service-card h3,
+        [style*="background: #d"] .service-card h3 {
+            color: rgba(0, 0, 0, 0.87);
+            text-shadow: none;
+        }
+
+        /* Добавляем контраст для иконок */
+        .service-card .icon-container {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+        }
+
+        .service-card .icon-container i {
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            padding: 0.5rem;
+        }
+
+        .logo img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .logo span {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: var(--text-color);
+        }
+
+        .settings-buttons {
+            display: flex;
+            gap: 0.5rem;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .settings-buttons .theme-toggle {
+            padding: 0.5rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(4px);
+            box-shadow: none;
+        }
+
+        .settings-buttons .theme-toggle:hover {
+            background: rgba(255, 255, 255, 0.15);
+            transform: translateY(-2px);
+        }
+
+        .settings-buttons .theme-toggle i {
+            font-size: 1.2rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Боковая панель -->
+        <aside class="sidebar">
+            <div class="logo">
+                <img src="berry-logo.svg" alt="Homelab">
+                <span>HOMELAB</span>
+            </div>
+            
+            <!-- Кнопки настроек -->
+            <div class="settings-buttons">
+                <button class="theme-toggle" onclick="saveSettings()" title="Сохранить настройки">
+                    <i class="material-icons">save</i>
+                </button>
+                <button class="theme-toggle" onclick="showLoadSettings()" title="Загрузить настройки">
+                    <i class="material-icons">file_upload</i>
+                </button>
+            </div>
+            
+            <nav>
+                <div class="nav-section">
+                    <h3>Мониторинг</h3>
+                    <ul>
+                        <li class="active"><i class="material-icons">dashboard</i>Сервисы</li>
+                        <li><i class="material-icons">analytics</i>Метрики</li>
+                        <li><i class="material-icons">warning</i>Алерты</li>
+                    </ul>
+                </div>
+
+                <div class="nav-section">
+                    <h3>Управление</h3>
+                    <ul>
+                        <li><i class="material-icons">computer</i>Хосты</li>
+                        <li><i class="material-icons">storage</i>Хранилище</li>
+                        <li><i class="material-icons">router</i>Сеть</li>
+                    </ul>
+                </div>
+            </nav>
+        </aside>
+
+        <!-- Основной контент -->
+        <main class="main-content">
+            <!-- Верхняя панель -->
+            <header class="top-bar">
+                <div class="search-bar">
+                    <i class="material-icons">search</i>
+                    <input type="text" placeholder="Поиск сервисов...">
+                </div>
+                <div class="slider-container">
+                    <label>Колонок:</label>
+                    <input type="range" id="gridColumns" min="2" max="6" value="4" step="1">
+                    <span class="column-count">4</span>
+                </div>
+                <div class="top-bar-actions">
+                    <button class="theme-toggle" onclick="toggleTheme()">
+                        <i class="material-icons">palette</i>
+                        THEME
+                    </button>
+                    <button class="neon-toggle" onclick="toggleNeonMode()">
+                        <i class="material-icons">bolt</i>
+                        NEON MODE
+                    </button>
+                    <i class="material-icons">translate</i>
+                    <i class="material-icons">notifications</i>
+                    <div class="profile-pic"></div>
+                    <i class="material-icons">settings</i>
+                </div>
+            </header>
+
+            <!-- Добавляем контролы для сетки -->
+            <div class="grid-controls">
+                <div class="slider-container">
+                    <label>Колонок:</label>
+                    <input type="range" id="gridColumns" min="2" max="6" value="4" step="1">
+                    <span class="column-count">4</span>
+                </div>
+            </div>
+
+            <!-- Кнопка добавления категории -->
+            <button class="add-category-button" onclick="showAddCategoryModal()">
+                <i class="material-icons">add_circle_outline</i>
+                Добавить категорию
+            </button>
+
+            <!-- Контейнер для категорий -->
+            <div id="categories-container">
+                <!-- Категории будут добавляться динамически -->
+            </div>
+
+            <!-- Сетка сервисов -->
+            <div class="services-grid">
+                <!-- Jenkins -->
+                <div class="service-card" data-service="jenkins">
+                    <div class="icon-container">
+                        <i class="material-icons">engineering</i>
+                    </div>
+                    <div class="content">
+                        <h3>Jenkins</h3>
+                        <p>CI/CD Pipeline</p>
+                        <span class="status online">Online</span>
+                    </div>
+                    <button class="edit-button">Edit</button>
+                </div>
+
+                <!-- Grafana -->
+                <div class="service-card" data-service="grafana">
+                    <div class="icon-container">
+                        <i class="material-icons">analytics</i>
+                    </div>
+                    <div class="content">
+                        <h3>Grafana</h3>
+                        <p>Мониторинг</p>
+                        <span class="status online">Online</span>
+                    </div>
+                    <button class="edit-button">Edit</button>
+                </div>
+
+                <!-- Prometheus -->
+                <div class="service-card" data-service="prometheus">
+                    <div class="icon-container">
+                        <i class="material-icons">timeline</i>
+                    </div>
+                    <div class="content">
+                        <h3>Prometheus</h3>
+                        <p>Метрики</p>
+                        <span class="status online">Online</span>
+                    </div>
+                    <button class="edit-button">Edit</button>
+                </div>
+
+                <!-- AlertManager -->
+                <div class="service-card" data-service="alertmanager">
+                    <div class="icon-container">
+                        <i class="material-icons">notification_important</i>
+                    </div>
+                    <div class="content">
+                        <h3>AlertManager</h3>
+                        <p>Оповещения</p>
+                        <span class="status online">Online</span>
+                    </div>
+                    <button class="edit-button">Edit</button>
+                </div>
+
+                <!-- Proxmox -->
+                <div class="service-card" data-service="proxmox">
+                    <div class="icon-container">
+                        <i class="material-icons">dns</i>
+                    </div>
+                    <div class="content">
+                        <h3>Proxmox</h3>
+                        <p>Виртуализация</p>
+                        <span class="status online">Online</span>
+                    </div>
+                    <button class="edit-button">Edit</button>
+                </div>
+
+                <!-- Router -->
+                <div class="service-card" data-service="router">
+                    <div class="icon-container">
+                        <i class="material-icons">router</i>
+                    </div>
+                    <div class="content">
+                        <h3>Router.lan</h3>
+                        <p>Сетевой шлюз</p>
+                        <span class="status online">Online</span>
+                    </div>
+                    <button class="edit-button">Edit</button>
+                </div>
+
+                <!-- Gitea -->
+                <div class="service-card" data-service="gitea">
+                    <div class="icon-container">
+                        <i class="material-icons">code</i>
+                    </div>
+                    <div class="content">
+                        <h3>Gitea</h3>
+                        <p>Git-сервер</p>
+                        <span class="status online">Online</span>
+                    </div>
+                    <button class="edit-button">Edit</button>
+                </div>
+
+                <!-- Mailcow -->
+                <div class="service-card" data-service="mailcow">
+                    <div class="icon-container">
+                        <i class="material-icons">email</i>
+                    </div>
+                    <div class="content">
+                        <h3>Mailcow</h3>
+                        <p>Почтовый сервер</p>
+                        <span class="status online">Online</span>
+                    </div>
+                    <button class="edit-button">Edit</button>
+                </div>
+
+                <!-- Nextcloud -->
+                <div class="service-card" data-service="nextcloud">
+                    <div class="icon-container">
+                        <i class="material-icons">cloud</i>
+                    </div>
+                    <div class="content">
+                        <h3>Nextcloud</h3>
+                        <p>Облачное хранилище</p>
+                        <span class="status online">Online</span>
+                    </div>
+                    <button class="edit-button">Edit</button>
+                </div>
+
+                <!-- GitLab -->
+                <div class="service-card" data-service="gitlab">
+                    <div class="icon-container">
+                        <i class="material-icons">merge_type</i>
+                    </div>
+                    <div class="content">
+                        <h3>GitLab</h3>
+                        <p>DevOps платформа</p>
+                        <span class="status online">Online</span>
+                    </div>
+                    <button class="edit-button">Edit</button>
+                </div>
+
+                <!-- FreeIPA -->
+                <div class="service-card" data-service="freeipa">
+                    <div class="icon-container">
+                        <i class="material-icons">security</i>
+                    </div>
+                    <div class="content">
+                        <h3>FreeIPA</h3>
+                        <p>Управление доступом</p>
+                        <span class="status online">Online</span>
+                    </div>
+                    <button class="edit-button">Edit</button>
+                </div>
+
+                <!-- AgentDVR -->
+                <div class="service-card" data-service="agentdvr">
+                    <div class="icon-container">
+                        <i class="material-icons">videocam</i>
+                    </div>
+                    <div class="content">
+                        <h3>AgentDVR</h3>
+                        <p>Видеонаблюдение</p>
+                        <span class="status online">Online</span>
+                    </div>
+                    <button class="edit-button">Edit</button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Обновленное модальное окно -->
+    <div class="modal" id="editModal">
+        <div class="modal-content">
+            <h2>Редактировать сервис</h2>
+            <form id="editForm">
+                <div class="form-group">
+                    <label>Название сервиса</label>
+                    <input type="text" id="serviceName" placeholder="Название сервиса">
+                </div>
+                <div class="form-group">
+                    <label>Описание</label>
+                    <input type="text" id="serviceDescription" placeholder="Краткое описание">
+                </div>
+                <div class="form-group">
+                    <label>URL сервиса</label>
+                    <input type="url" id="serviceUrl" placeholder="https://example.com">
+                </div>
+                <div class="form-group">
+                    <label>URL иконки</label>
+                    <input type="url" id="iconUrl" placeholder="https://example.com/icon.png">
+                </div>
+                <div class="form-group">
+                    <label>Категория</label>
+                    <select id="serviceCategory">
+                        <option value="monitoring">Мониторинг</option>
+                        <option value="ci-cd">CI/CD</option>
+                        <option value="storage">Хранилище</option>
+                        <option value="security">Безопасность</option>
+                        <option value="network">Сеть</option>
+                    </select>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="cancel-button">Отмена</button>
+                    <button type="submit" class="save-button">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Модальное окно для добавления/редактирования категории -->
+    <div class="modal category-modal" id="categoryModal">
+        <div class="modal-content">
+            <h2 id="categoryModalTitle">Добавить категорию</h2>
+            <form id="categoryForm">
+                <div class="form-group">
+                    <label>Название категории</label>
+                    <input type="text" id="categoryName" placeholder="Название категории" required>
+                </div>
+                <div class="form-group">
+                    <label>Цвет</label>
+                    <div class="color-picker">
+                        <div class="color-option" style="background: #5e35b1" data-color="#5e35b1"></div>
+                        <div class="color-option" style="background: #2196f3" data-color="#2196f3"></div>
+                        <div class="color-option" style="background: #00C49A" data-color="#00C49A"></div>
+                        <div class="color-option" style="background: #ff4560" data-color="#ff4560"></div>
+                        <div class="color-option" style="background: #775DD0" data-color="#775DD0"></div>
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="cancel-button" onclick="closeCategoryModal()">Отмена</button>
+                    <button type="submit" class="save-button">Сохранить</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Добавляем модальное окно для создания сервиса -->
+    <div class="modal add-service-modal" id="addServiceModal">
+        <div class="modal-content">
+            <h2>Добавить сервис</h2>
+            <form id="addServiceForm">
+                <div class="form-group">
+                    <label>Название сервиса</label>
+                    <input type="text" id="newServiceName" placeholder="Название сервиса" required>
+                </div>
+                <div class="form-group">
+                    <label>Описание</label>
+                    <input type="text" id="newServiceDescription" placeholder="Краткое описание" required>
+                </div>
+                <div class="form-group">
+                    <label>URL сервиса</label>
+                    <input type="url" id="newServiceUrl" placeholder="https://example.com">
+                </div>
+                <div class="form-group">
+                    <label>URL иконки (необязательно)</label>
+                    <input type="url" id="newServiceIconUrl" placeholder="https://example.com/icon.png">
+                </div>
+                <div class="form-group">
+                    <label>Иконка</label>
+                    <div class="icon-preview">
+                        <i class="material-icons">widgets</i>
+                    </div>
+                    <div class="icon-selector">
+                        <!-- Иконки будут добавлены через JavaScript -->
+                    </div>
+                </div>
+                <div class="modal-buttons">
+                    <button type="button" class="cancel-button" onclick="closeAddServiceModal()">Отмена</button>
+                    <button type="submit" class="save-button">Создать</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // Инициализация начальных данных
+        function initializeData() {
+            const savedServices = JSON.parse(localStorage.getItem('services') || '{}');
+            const initialServices = {};
+            
+            // Сохраняем все карточки при первом запуске
+            if (Object.keys(savedServices).length === 0) {
+                const servicesGrid = document.querySelector('.services-grid');
+                servicesGrid.querySelectorAll('.service-card').forEach(card => {
+                    const serviceId = card.getAttribute('data-service');
+                    const iconElement = card.querySelector('.icon-container i');
+                    initialServices[serviceId] = {
+                        name: card.querySelector('h3').textContent,
+                        description: card.querySelector('p').textContent,
+                        category: 'category_servers',
+                        iconUrl: '',
+                        url: '',
+                        icon: iconElement ? iconElement.textContent : ''
+                    };
+                });
+                localStorage.setItem('services', JSON.stringify(initialServices));
+            }
+
+            // Инициализация категорий при первом запуске
+            const categories = JSON.parse(localStorage.getItem('categories') || '[]');
+            if (categories.length === 0) {
+                categories.push({
+                    id: 'category_servers',
+                    name: 'Серверы',
+                    color: '#2196f3'
+                });
+                localStorage.setItem('categories', JSON.stringify(categories));
+            }
+        }
+
+        // Загрузка при старте
+        document.addEventListener('DOMContentLoaded', () => {
+            initializeData();
+            loadCategories();
+        });
+
+        // Функция создания секции категории
+        function createCategorySection(category) {
+            const section = document.createElement('div');
+            section.className = 'category-section';
+            section.dataset.categoryId = category.id;
+            
+            section.innerHTML = `
+                <div class="category-header">
+                    <h2>
+                        <i class="material-icons" style="color: ${category.color}">folder</i>
+                        ${category.name}
+                    </h2>
+                    <div class="actions">
+                        <button class="add-service-button" onclick="showAddServiceModal('${category.id}')">
+                            <i class="material-icons">add_circle_outline</i>
+                        </button>
+                        <button onclick="editCategory('${category.id}')">
+                            <i class="material-icons">edit</i>
+                        </button>
+                        <button onclick="deleteCategory('${category.id}')">
+                            <i class="material-icons">delete</i>
+                        </button>
+                    </div>
+                </div>
+                <div class="category-content" data-category="${category.id}"></div>
+            `;
+
+            return section;
+        }
+
+        // Функция удаления категории
+        function deleteCategory(categoryId) {
+            if (confirm('Вы уверены, что хотите удалить эту категорию?')) {
+                const categories = JSON.parse(localStorage.getItem('categories') || '[]');
+                const defaultCategory = categories.find(c => c.id !== categoryId) || categories[0];
+                
+                // Перемещаем все сервисы в другую категорию
+                const savedServices = JSON.parse(localStorage.getItem('services') || '{}');
+                Object.keys(savedServices).forEach(serviceId => {
+                    if (savedServices[serviceId].category === categoryId) {
+                        savedServices[serviceId].category = defaultCategory.id;
+                    }
+                });
+                localStorage.setItem('services', JSON.stringify(savedServices));
+                
+                // Удаляем категорию
+                const newCategories = categories.filter(c => c.id !== categoryId);
+                localStorage.setItem('categories', JSON.stringify(newCategories));
+                
+                loadCategories();
+            }
+        }
+
+        // Функция распределения сервисов
+        function distributeServices() {
+            const savedServices = JSON.parse(localStorage.getItem('services') || '{}');
+            
+            // Очищаем все категории перед распределением
+            document.querySelectorAll('.category-content').forEach(category => {
+                category.innerHTML = '';
+            });
+            
+            // Распределяем все сервисы по категориям
+            Object.entries(savedServices).forEach(([serviceId, serviceData]) => {
+                // Создаем карточку
+                const card = document.createElement('div');
+                card.className = 'service-card';
+                card.setAttribute('data-service', serviceId);
+                card.innerHTML = `
+                    <div class="icon-container">
+                        ${serviceData.iconUrl ? 
+                            `<img src="${serviceData.iconUrl}" alt="icon" style="width: 24px; height: 24px;">` :
+                            `<i class="material-icons">${serviceData.icon || 'widgets'}</i>`}
+                    </div>
+                    <div class="content">
+                        <h3>${serviceData.name}</h3>
+                        <p>${serviceData.description}</p>
+                        <span class="status online">Online</span>
+                    </div>
+                    <button class="edit-button">Edit</button>
+                `;
+
+                if (serviceData.url) {
+                    card.setAttribute('data-url', serviceData.url);
+                }
+
+                // Находим целевую категорию
+                const targetCategory = document.querySelector(`.category-content[data-category="${serviceData.category}"]`);
+                if (targetCategory) {
+                    attachCardEventListeners(card);
+                    targetCategory.appendChild(card);
+                } else {
+                    // Если категория не найдена, помещаем в категорию "Серверы"
+                    const defaultCategory = document.querySelector('.category-content[data-category="category_servers"]');
+                    if (defaultCategory) {
+                        serviceData.category = 'category_servers';
+                        attachCardEventListeners(card);
+                        defaultCategory.appendChild(card);
+                        // Обновляем данные в localStorage
+                        savedServices[serviceId].category = 'category_servers';
+                        localStorage.setItem('services', JSON.stringify(savedServices));
+                    }
+                }
+            });
+        }
+
+        // Загрузка сохраненных данных при старте
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedServices = JSON.parse(localStorage.getItem('services') || '{}');
+            
+            document.querySelectorAll('.service-card').forEach(card => {
+                const serviceId = card.getAttribute('data-service');
+                if (savedServices[serviceId]) {
+                    updateCardWithData(card, savedServices[serviceId]);
+                }
+            });
+        });
+
+        // Функция обновления карточки
+        function updateCardWithData(card, data) {
+            if (data.name) {
+                card.querySelector('h3').textContent = data.name;
+            }
+            if (data.description) {
+                card.querySelector('p').textContent = data.description;
+            }
+            
+            // Обновление иконки
+            const iconContainer = card.querySelector('.icon-container');
+            if (data.iconUrl) {
+                iconContainer.innerHTML = `<img src="${data.iconUrl}" alt="icon" style="width: 24px; height: 24px;">`;
+            } else if (data.icon) {
+                iconContainer.innerHTML = `<i class="material-icons">${data.icon}</i>`;
+            }
+            
+            if (data.url) {
+                card.setAttribute('data-url', data.url);
+                // Запускаем проверку статуса после обновления URL
+                checkServiceStatus(card);
+            }
+            card.setAttribute('data-category', data.category || '');
+        }
+
+        // Функция сохранения данных
+        function saveServiceData(serviceId, data) {
+            const savedServices = JSON.parse(localStorage.getItem('services') || '{}');
+            const currentData = savedServices[serviceId] || {};
+            
+            // Сохраняем текущую иконку, если новая не задана
+            if (!data.iconUrl && currentData.icon) {
+                data.icon = currentData.icon;
+            }
+            
+            savedServices[serviceId] = {
+                ...currentData,
+                ...data
+            };
+            localStorage.setItem('services', JSON.stringify(savedServices));
+        }
+
+        const modal = document.getElementById('editModal');
+        const editForm = document.getElementById('editForm');
+        let currentCard = null;
+
+        // Обработчик для кнопок редактирования
+        document.querySelectorAll('.edit-button').forEach(button => {
+            button.addEventListener('click', (e) => {
+                e.stopPropagation();
+                currentCard = button.closest('.service-card');
+                const serviceId = currentCard.getAttribute('data-service');
+                const savedServices = JSON.parse(localStorage.getItem('services') || '{}');
+                const savedData = savedServices[serviceId] || {};
+
+                // Заполняем форму текущими значениями
+                document.getElementById('serviceName').value = currentCard.querySelector('h3').textContent;
+                document.getElementById('serviceDescription').value = currentCard.querySelector('p').textContent;
+                document.getElementById('serviceUrl').value = currentCard.getAttribute('data-url') || '';
+                document.getElementById('iconUrl').value = savedData.iconUrl || '';
+                document.getElementById('serviceCategory').value = savedData.category || 'monitoring';
+
+                modal.classList.add('active');
+            });
+        });
+
+        // Закрытие модального окна
+        document.querySelector('.cancel-button').addEventListener('click', () => {
+            modal.classList.remove('active');
+        });
+
+        // Сохранение изменений
+        editForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            if (!currentCard) return;
+
+            const serviceId = currentCard.getAttribute('data-service');
+            const data = {
+                name: document.getElementById('serviceName').value,
+                description: document.getElementById('serviceDescription').value,
+                url: document.getElementById('serviceUrl').value,
+                iconUrl: document.getElementById('iconUrl').value,
+                category: currentCard.closest('.category-content').dataset.category // Получаем текущую категорию
+            };
+
+            // Если URL иконки пустой, сохраняем текущую иконку Material Icons
+            if (!data.iconUrl) {
+                const iconElement = currentCard.querySelector('.icon-container i');
+                if (iconElement) {
+                    data.icon = iconElement.textContent;
+                }
+            }
+
+            updateCardWithData(currentCard, data);
+            saveServiceData(serviceId, data);
+            modal.classList.remove('active');
+        });
+
+        // Обработчик клика по карточке
+        document.querySelectorAll('.service-card').forEach(card => {
+            card.addEventListener('click', () => {
+                const serviceUrl = card.getAttribute('data-url');
+                if (serviceUrl) {
+                    window.open(serviceUrl, '_blank');
+                }
+            });
+        });
+
+        // Обновляем функционал слайдера
+        const gridColumnsSlider = document.getElementById('gridColumns');
+        const columnCountDisplay = document.querySelector('.column-count');
+
+        // Загружаем сохраненное значение количества колонок
+        const savedColumnCount = localStorage.getItem('gridColumns') || 4;
+        document.documentElement.style.setProperty('--grid-columns', savedColumnCount);
+        gridColumnsSlider.value = savedColumnCount;
+        columnCountDisplay.textContent = savedColumnCount;
+
+        gridColumnsSlider.addEventListener('input', (e) => {
+            const columns = e.target.value;
+            columnCountDisplay.textContent = columns;
+            document.documentElement.style.setProperty('--grid-columns', columns);
+            
+            // Обновляем все сетки категорий
+            document.querySelectorAll('.category-content').forEach(grid => {
+                grid.style.gridTemplateColumns = `repeat(${columns}, 1fr)`;
+            });
+            
+            localStorage.setItem('gridColumns', columns);
+        });
+
+        // Загрузка категорий и сервисов при старте
+        document.addEventListener('DOMContentLoaded', () => {
+            loadCategories();
+        });
+
+        // Функции для работы с категориями
+        function loadCategories() {
+            const categories = JSON.parse(localStorage.getItem('categories') || '[]');
+            const container = document.getElementById('categories-container');
+            container.innerHTML = '';
+
+            categories.forEach(category => {
+                container.appendChild(createCategorySection(category));
+            });
+
+            // После создания категорий, распределяем сервисы
+            distributeServices();
+            initDragAndDrop();
+        }
+
+        // Функции для модального окна категории
+        let currentCategoryId = null;
+
+        function showAddCategoryModal() {
+            currentCategoryId = null;
+            document.getElementById('categoryModalTitle').textContent = 'Добавить категорию';
+            document.getElementById('categoryName').value = '';
+            document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+            document.getElementById('categoryModal').classList.add('active');
+        }
+
+        function closeCategoryModal() {
+            document.getElementById('categoryModal').classList.remove('active');
+        }
+
+        // Обработка формы категории
+        document.getElementById('categoryForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const name = document.getElementById('categoryName').value;
+            const color = document.querySelector('.color-option.selected')?.dataset.color || '#5e35b1';
+            
+            const categories = JSON.parse(localStorage.getItem('categories') || '[]');
+            
+            if (currentCategoryId) {
+                // Редактирование
+                const index = categories.findIndex(c => c.id === currentCategoryId);
+                if (index !== -1) {
+                    categories[index] = { ...categories[index], name, color };
+                }
+            } else {
+                // Добавление
+                categories.push({
+                    id: 'category_' + Date.now(),
+                    name,
+                    color
+                });
+            }
+            
+            localStorage.setItem('categories', JSON.stringify(categories));
+            loadCategories();
+            closeCategoryModal();
+        });
+
+        // Выбор цвета
+        document.querySelectorAll('.color-option').forEach(option => {
+            option.addEventListener('click', () => {
+                document.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
+                option.classList.add('selected');
+            });
+        });
+
+        // Drag and Drop функционал
+        function initDragAndDrop() {
+            const cards = document.querySelectorAll('.service-card');
+            const dropZones = document.querySelectorAll('.category-content');
+
+            cards.forEach(card => {
+                card.setAttribute('draggable', true);
+                
+                card.addEventListener('dragstart', (e) => {
+                    e.stopPropagation();
+                    card.classList.add('dragging');
+                    e.dataTransfer.setData('text/plain', card.dataset.service);
+                });
+
+                card.addEventListener('dragend', () => {
+                    card.classList.remove('dragging');
+                    document.querySelectorAll('.category-content').forEach(zone => {
+                        zone.classList.remove('drag-over');
+                    });
+                });
+
+                // Предотвращаем открытие ссылки при перетаскивании
+                card.addEventListener('click', (e) => {
+                    if (card.classList.contains('dragging')) {
+                        e.preventDefault();
+                        return false;
+                    }
+                });
+            });
+
+            dropZones.forEach(zone => {
+                zone.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    zone.classList.add('drag-over');
+                });
+
+                zone.addEventListener('dragleave', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    zone.classList.remove('drag-over');
+                });
+
+                zone.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    zone.classList.remove('drag-over');
+                    
+                    const serviceId = e.dataTransfer.getData('text/plain');
+                    const card = document.querySelector(`[data-service="${serviceId}"]`);
+                    const newCategory = zone.dataset.category;
+                    
+                    if (card && newCategory) {
+                        zone.appendChild(card);
+                        updateServiceCategory(serviceId, newCategory);
+                    }
+                });
+            });
+        }
+
+        function updateServiceCategory(serviceId, categoryId) {
+            const savedServices = JSON.parse(localStorage.getItem('services') || '{}');
+            if (savedServices[serviceId]) {
+                savedServices[serviceId].category = categoryId;
+                localStorage.setItem('services', JSON.stringify(savedServices));
+                
+                // Обновляем отображение после изменения категории
+                loadCategories();
+            }
+        }
+
+        // Функции редактирования и удаления категорий
+        function editCategory(categoryId) {
+            const categories = JSON.parse(localStorage.getItem('categories') || '[]');
+            const category = categories.find(c => c.id === categoryId);
+            
+            if (category) {
+                currentCategoryId = categoryId;
+                document.getElementById('categoryModalTitle').textContent = 'Редактировать категорию';
+                document.getElementById('categoryName').value = category.name;
+                
+                document.querySelectorAll('.color-option').forEach(opt => {
+                    opt.classList.toggle('selected', opt.dataset.color === category.color);
+                });
+                
+                document.getElementById('categoryModal').classList.add('active');
+            }
+        }
+
+        // Функция для добавления обработчиков событий к карточке
+        function attachCardEventListeners(card) {
+            // Обработчик для кнопки Edit
+            const editButton = card.querySelector('.edit-button');
+            if (editButton) {
+                editButton.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    currentCard = card;
+                    const serviceId = card.getAttribute('data-service');
+                    const savedServices = JSON.parse(localStorage.getItem('services') || '{}');
+                    const savedData = savedServices[serviceId] || {};
+
+                    // Заполняем форму текущими значениями
+                    document.getElementById('serviceName').value = card.querySelector('h3').textContent;
+                    document.getElementById('serviceDescription').value = card.querySelector('p').textContent;
+                    document.getElementById('serviceUrl').value = card.getAttribute('data-url') || '';
+                    document.getElementById('iconUrl').value = savedData.iconUrl || '';
+                    document.getElementById('serviceCategory').value = savedData.category || 'monitoring';
+
+                    modal.classList.add('active');
+                });
+            }
+
+            // Обработчик для клика по карточке
+            card.addEventListener('click', () => {
+                const serviceUrl = card.getAttribute('data-url');
+                if (serviceUrl) {
+                    window.open(serviceUrl, '_blank');
+                }
+            });
+
+            // Обработчики для drag and drop
+            card.setAttribute('draggable', true);
+            
+            card.addEventListener('dragstart', (e) => {
+                e.stopPropagation();
+                card.classList.add('dragging');
+                e.dataTransfer.setData('text/plain', card.dataset.service);
+            });
+
+            card.addEventListener('dragend', () => {
+                card.classList.remove('dragging');
+                document.querySelectorAll('.category-content').forEach(zone => {
+                    zone.classList.remove('drag-over');
+                });
+            });
+
+            // Предотвращаем открытие ссылки при перетаскивании
+            card.addEventListener('click', (e) => {
+                if (card.classList.contains('dragging')) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
+        }
+
+        // Удаляем старые обработчики событий, так как теперь они добавляются через attachCardEventListeners
+        document.querySelectorAll('.edit-button').forEach(button => {
+            const newButton = button.cloneNode(true);
+            button.parentNode.replaceChild(newButton, button);
+        });
+
+        document.querySelectorAll('.service-card').forEach(card => {
+            const newCard = card.cloneNode(true);
+            card.parentNode.replaceChild(newCard, card);
+        });
+
+        // Список популярных иконок Material Icons
+        const popularIcons = [
+            'computer', 'dns', 'storage', 'router', 'cloud', 
+            'security', 'dashboard', 'analytics', 'warning',
+            'build', 'code', 'database', 'backup', 'settings',
+            'web', 'public', 'vpn_key', 'memory', 'developer_board',
+            'http', 'api', 'integration_instructions', 'rule',
+            'monitoring', 'bug_report', 'speed', 'schedule'
+        ];
+
+        let currentCategoryIdForNewService = null;
+
+        // Инициализация селектора иконок
+        function initializeIconSelector() {
+            const iconSelector = document.querySelector('.icon-selector');
+            iconSelector.innerHTML = popularIcons.map(icon => `
+                <div class="icon-option" data-icon="${icon}">
+                    <i class="material-icons">${icon}</i>
+                </div>
+            `).join('');
+
+            // Добавляем обработчики для выбора иконки
+            document.querySelectorAll('.icon-option').forEach(option => {
+                option.addEventListener('click', () => {
+                    document.querySelectorAll('.icon-option').forEach(opt => 
+                        opt.classList.remove('selected'));
+                    option.classList.add('selected');
+                    
+                    // Обновляем превью
+                    const iconPreview = document.querySelector('.icon-preview');
+                    const selectedIcon = option.dataset.icon;
+                    iconPreview.innerHTML = `<i class="material-icons">${selectedIcon}</i>`;
+                });
+            });
+        }
+
+        // Показать модальное окно добавления сервиса
+        function showAddServiceModal(categoryId) {
+            currentCategoryIdForNewService = categoryId;
+            document.getElementById('addServiceModal').classList.add('active');
+            document.getElementById('addServiceForm').reset();
+            initializeIconSelector();
+            
+            // Выбираем первую иконку по умолчанию
+            const firstIcon = document.querySelector('.icon-option');
+            if (firstIcon) {
+                firstIcon.click();
+            }
+        }
+
+        // Закрыть модальное окно добавления сервиса
+        function closeAddServiceModal() {
+            document.getElementById('addServiceModal').classList.remove('active');
+            currentCategoryIdForNewService = null;
+        }
+
+        // Обработка формы добавления сервиса
+        document.getElementById('addServiceForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            
+            const serviceId = 'service_' + Date.now();
+            const selectedIcon = document.querySelector('.icon-option.selected')?.dataset.icon || 'widgets';
+            const iconUrl = document.getElementById('newServiceIconUrl').value;
+            const name = document.getElementById('newServiceName').value;
+            const description = document.getElementById('newServiceDescription').value;
+            const url = document.getElementById('newServiceUrl').value;
+            
+            const serviceData = {
+                name,
+                description,
+                url,
+                iconUrl,
+                icon: selectedIcon,
+                category: currentCategoryIdForNewService
+            };
+
+            // Сохраняем данные
+            const savedServices = JSON.parse(localStorage.getItem('services') || '{}');
+            savedServices[serviceId] = serviceData;
+            localStorage.setItem('services', JSON.stringify(savedServices));
+
+            // Обновляем отображение
+            loadCategories();
+            closeAddServiceModal();
+        });
+
+        // Обработчик изменения URL иконки
+        document.getElementById('newServiceIconUrl').addEventListener('input', (e) => {
+            const iconPreview = document.querySelector('.icon-preview');
+            const url = e.target.value;
+            
+            if (url) {
+                iconPreview.innerHTML = `<img src="${url}" alt="icon">`;
+                // Снимаем выделение с иконок Material
+                document.querySelectorAll('.icon-option').forEach(opt => 
+                    opt.classList.remove('selected'));
+            } else {
+                // Возвращаем выбранную иконку Material или первую доступную
+                const selectedIcon = document.querySelector('.icon-option.selected') || 
+                                   document.querySelector('.icon-option');
+                if (selectedIcon) {
+                    selectedIcon.click();
+                }
+            }
+        });
+
+        // Добавляем функцию переключения неонового режима
+        function toggleNeonMode() {
+            document.body.classList.toggle('neon-mode');
+            const isNeonMode = document.body.classList.contains('neon-mode');
+            localStorage.setItem('neonMode', isNeonMode);
+            
+            if (isNeonMode) {
+                animateNeonCards();
+            }
+        }
+
+        // Восстанавливаем состояние неонового режима при загрузке
+        document.addEventListener('DOMContentLoaded', () => {
+            const isNeonMode = localStorage.getItem('neonMode') === 'true';
+            if (isNeonMode) {
+                document.body.classList.add('neon-mode');
+                animateNeonCards();
+            }
+        });
+
+        // Массив неоновых цветов для анимации
+        const neonColors = [
+            '#b537f2', // purple
+            '#3b82f6', // blue
+            '#f63b8e', // pink
+            '#3bf63b', // green
+            '#ff4560', // red
+            '#00e5ff', // cyan
+            '#ffeb3b', // yellow
+            '#ff9800'  // orange
+        ];
+
+        // Функция для анимации цветов карточек
+        function animateNeonCards() {
+            if (!document.body.classList.contains('neon-mode')) return;
+            
+            const cards = document.querySelectorAll('.service-card');
+            cards.forEach((card, index) => {
+                const colorIndex = (Math.floor(Date.now() / 2000) + index) % neonColors.length;
+                const nextColorIndex = (colorIndex + 1) % neonColors.length;
+                const progress = (Date.now() % 2000) / 2000;
+                
+                // Интерполяция между текущим и следующим цветом
+                card.style.color = neonColors[colorIndex];
+                card.style.borderColor = `rgba(${hexToRgb(neonColors[colorIndex]).join(',')}, 0.3)`;
+            });
+            
+            requestAnimationFrame(animateNeonCards);
+        }
+
+        // Функция для конвертации HEX в RGB
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? [
+                parseInt(result[1], 16),
+                parseInt(result[2], 16),
+                parseInt(result[3], 16)
+            ] : [0, 0, 0];
+        }
+
+        // Функция применения темы
+        function applyTheme(themeNumber) {
+            const root = document.documentElement;
+            
+            root.style.setProperty('--primary-color', `var(--theme-${themeNumber}-primary)`);
+            root.style.setProperty('--secondary-color', `var(--theme-${themeNumber}-secondary)`);
+            root.style.setProperty('--background-color', `var(--theme-${themeNumber}-background)`);
+            root.style.setProperty('--card-background', `var(--theme-${themeNumber}-card)`);
+            
+            // Обновляем градиент кнопки переключения темы
+            const themeToggle = document.querySelector('.theme-toggle');
+            if (themeToggle) {
+                themeToggle.style.background = `linear-gradient(45deg, var(--theme-${themeNumber}-primary), var(--theme-${themeNumber}-secondary))`;
+            }
+        }
+
+        // Функция для переключения темы
+        function toggleTheme() {
+            const currentTheme = parseInt(localStorage.getItem('currentTheme') || '1');
+            const clickCount = parseInt(localStorage.getItem('themeClickCount') || '0');
+            
+            // Если достигли 20 кликов, возвращаемся к первой теме
+            if (clickCount >= 20) {
+                applyTheme(1);
+                localStorage.setItem('currentTheme', '1');
+                localStorage.setItem('themeClickCount', '0');
+                return;
+            }
+            
+            // Генерируем случайное число от 2 до 20 (исключая первую тему)
+            let nextTheme;
+            do {
+                nextTheme = Math.floor(Math.random() * 19) + 2; // 2-20
+            } while (nextTheme === currentTheme);
+            
+            applyTheme(nextTheme);
+            localStorage.setItem('currentTheme', nextTheme);
+            localStorage.setItem('themeClickCount', (clickCount + 1).toString());
+            
+            // Обновляем текст кнопки, показывая оставшиеся клики
+            const themeToggle = document.querySelector('.theme-toggle');
+            if (themeToggle) {
+                themeToggle.innerHTML = `
+                    <i class="material-icons">save</i>
+                    
+                `;
+            }
+        }
+
+        // Восстанавливаем тему и счетчик при загрузке
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = parseInt(localStorage.getItem('currentTheme') || '1');
+            const clickCount = parseInt(localStorage.getItem('themeClickCount') || '0');
+            applyTheme(savedTheme);
+            
+            // Обновляем текст кнопки при загрузке
+            const themeToggle = document.querySelector('.theme-toggle');
+            if (themeToggle) {
+                themeToggle.innerHTML = `
+                    <i class="material-icons">save</i>
+                   
+                `;
+            }
+            
+            const isNeonMode = localStorage.getItem('neonMode') === 'true';
+            if (isNeonMode) {
+                document.body.classList.add('neon-mode');
+                animateNeonCards();
+            }
+        });
+
+        // Функция фильтрации карточек
+        function filterCards(searchText) {
+            const cards = document.querySelectorAll('.service-card');
+            const normalizedSearch = searchText.toLowerCase();
+            
+            cards.forEach(card => {
+                const title = card.querySelector('h3').textContent.toLowerCase();
+                const description = card.querySelector('p').textContent.toLowerCase();
+                const isMatch = title.includes(normalizedSearch) || description.includes(normalizedSearch);
+                
+                // Плавное изменение прозрачности
+                if (isMatch) {
+                    card.style.display = 'flex';
+                    card.style.opacity = '1';
+                } else {
+                    card.style.opacity = '0';
+                    setTimeout(() => {
+                        if (card.style.opacity === '0') {
+                            card.style.display = 'none';
+                        }
+                    }, 200);
+                }
+            });
+
+            // Скрываем пустые категории
+            document.querySelectorAll('.category-section').forEach(section => {
+                const visibleCards = section.querySelectorAll('.service-card[style*="display: flex"]').length;
+                section.style.display = visibleCards > 0 ? 'block' : 'none';
+            });
+        }
+
+        // Добавляем обработчик события input для поля поиска
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchInput = document.querySelector('.search-bar input');
+            searchInput.addEventListener('input', (e) => {
+                filterCards(e.target.value);
+            });
+
+            // Добавляем стили для плавной анимации
+            const style = document.createElement('style');
+            style.textContent = `
+                .service-card {
+                    transition: opacity 0.2s ease-in-out;
+                }
+                .category-section {
+                    transition: opacity 0.2s ease-in-out;
+                }
+            `;
+            document.head.appendChild(style);
+        });
+
+        // Функции для работы с настройками
+        async function saveSettings() {
+            const settings = {
+                services: JSON.parse(localStorage.getItem('services') || '{}'),
+                categories: JSON.parse(localStorage.getItem('categories') || '[]'),
+                theme: {
+                    current: parseInt(localStorage.getItem('currentTheme') || '1'),
+                    clickCount: parseInt(localStorage.getItem('themeClickCount') || '0')
+                },
+                gridColumns: parseInt(localStorage.getItem('gridColumns') || '4'),
+                neonMode: localStorage.getItem('neonMode') === 'true'
+            };
+
+            const blob = new Blob([JSON.stringify(settings, null, 2)], { type: 'application/json' });
+            const a = document.createElement('a');
+            a.href = URL.createObjectURL(blob);
+            a.download = 'dashboard_settings.json';
+            a.click();
+            URL.revokeObjectURL(a.href);
+        }
+
+        async function loadSettings(file) {
+            try {
+                const text = await file.text();
+                const settings = JSON.parse(text);
+
+                // Восстанавливаем все настройки
+                localStorage.setItem('services', JSON.stringify(settings.services || {}));
+                localStorage.setItem('categories', JSON.stringify(settings.categories || []));
+                localStorage.setItem('currentTheme', settings.theme?.current || 1);
+                localStorage.setItem('themeClickCount', settings.theme?.clickCount || 0);
+                localStorage.setItem('gridColumns', settings.gridColumns || 4);
+                localStorage.setItem('neonMode', settings.neonMode || false);
+
+                // Применяем настройки
+                applyTheme(settings.theme?.current || 1);
+                document.documentElement.style.setProperty('--grid-columns', settings.gridColumns);
+                if (settings.neonMode) {
+                    document.body.classList.add('neon-mode');
+                    animateNeonCards();
+                } else {
+                    document.body.classList.remove('neon-mode');
+                }
+
+                // Обновляем отображение
+                loadCategories();
+                
+                // Обновляем слайдер колонок
+                const gridColumnsSlider = document.getElementById('gridColumns');
+                const columnCountDisplay = document.querySelector('.column-count');
+                if (gridColumnsSlider && columnCountDisplay) {
+                    gridColumnsSlider.value = settings.gridColumns;
+                    columnCountDisplay.textContent = settings.gridColumns;
+                }
+
+                // Обновляем кнопку темы
+                const themeToggle = document.querySelector('.theme-toggle');
+                if (themeToggle) {
+                    themeToggle.innerHTML = `
+                        <i class="material-icons">palette</i>
+                        THEME (${20 - (settings.theme?.clickCount || 0)})
+                    `;
+                }
+
+                alert('Настройки успешно загружены!');
+            } catch (error) {
+                console.error('Ошибка при загрузке настроек:', error);
+                alert('Ошибка при загрузке настроек. Проверьте консоль для деталей.');
+            }
+        }
+
+        // Обновляем функцию загрузки настроек
+        function showLoadSettings() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.onchange = (e) => {
+                const file = e.target.files[0];
+                if (file) {
+                    loadSettings(file);
+                }
+            };
+            input.click();
+        }
+
+        // Функция для проверки статуса одного сервиса
+        async function checkServiceStatus(card) {
+            const url = card.getAttribute('data-url');
+            if (!url) return;
+
+            const statusElement = card.querySelector('.status');
+            statusElement.textContent = 'Проверка...';
+            statusElement.className = 'status checking';
+
+            try {
+                const response = await fetch(`http://localhost:5757/check?url=${encodeURIComponent(url)}`);
+                const data = await response.json();
+
+                statusElement.className = `status ${data.status}`;
+                statusElement.textContent = data.status === 'online' ? 'Online' : 'Offline';
+            } catch (error) {
+                statusElement.className = 'status offline';
+                statusElement.textContent = 'Offline';
+                console.error('Ошибка проверки статуса:', error);
+            }
+        }
+
+        // Функция для проверки всех сервисов
+        async function checkAllServices() {
+            const cards = document.querySelectorAll('.service-card[data-url]');
+            const checks = Array.from(cards).map(card => checkServiceStatus(card));
+            await Promise.all(checks);
+        }
+
+        // Запускаем проверку при загрузке страницы и каждые 10 секунд
+        document.addEventListener('DOMContentLoaded', () => {
+            checkAllServices();
+            setInterval(checkAllServices, 10000);
+        });
+    </script>
+</body>
+</html> 
